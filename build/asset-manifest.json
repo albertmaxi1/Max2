@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "//albertmaxi1.github.io/max2/static/css/main.cf890fdb.css",
+    "main.js": "//albertmaxi1.github.io/max2/static/js/main.c9846be6.js",
+    "index.html": "//albertmaxi1.github.io/max2/index.html",
+    "main.cf890fdb.css.map": "//albertmaxi1.github.io/max2/static/css/main.cf890fdb.css.map",
+    "main.c9846be6.js.map": "//albertmaxi1.github.io/max2/static/js/main.c9846be6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cf890fdb.css",
+    "static/js/main.c9846be6.js"
+  ]
+}
