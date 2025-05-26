@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// Removed all Firebase imports
-
-// Removed Canvas-specific global variables
-// const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-// const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-
-// Removed Firebase initialization and auth setup
-// let firebaseApp, dbInstance, authInstance;
-// function initializeFirebase() { /* ... */ }
+// Removed all Firebase imports and related global variables.
 
 // Function to call Gemini API for text generation
 const callGeminiTextAPI = async (prompt) => {
@@ -15,7 +7,8 @@ const callGeminiTextAPI = async (prompt) => {
     let chatHistory = [];
     chatHistory.push({ role: "user", parts: [{ text: prompt }] });
     const payload = { contents: chatHistory };
-    const apiKey = "AIzaSyDr8Zs5bbGFhGHHGq0o4MiUzX2KEnPb89g"; // Your API key directly
+    // Your API key is placed directly here. Keep it secure!
+    const apiKey = "AIzaSyDr8Zs5bbGFhGHHGq0o4MiUzX2KEnPb89g";
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(apiUrl, {
@@ -29,7 +22,7 @@ const callGeminiTextAPI = async (prompt) => {
     if (result.candidates && result.candidates.length > 0 &&
         result.candidates[0].content && result.candidates[0].content.parts &&
         result.candidates[0].content.parts.length > 0) {
-      return result.candidates[0].content.parts[0].text; // Corrected path for text
+      return result.candidates[0].content.parts[0].text;
     } else {
       console.error("Gemini API response structure unexpected:", result);
       return "Failed to generate text. Please try again.";
@@ -44,7 +37,8 @@ const callGeminiTextAPI = async (prompt) => {
 const callImagenAPI = async (prompt) => {
   try {
     const payload = { instances: { prompt: prompt }, parameters: { "sampleCount": 1 } };
-    const apiKey = "AIzaSyDr8Zs5bbGFhGHHGq0o4MiUzX2KEnPb89g"; // Your API key directly
+    // Your API key is placed directly here. Keep it secure!
+    const apiKey = "AIzaSyDr8Zs5bbGFhGHHGq0o4MiUzX2KEnPb89g";
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
 
     const response = await fetch(apiUrl, {
@@ -68,8 +62,8 @@ const callImagenAPI = async (prompt) => {
 };
 
 // Home Page Component
-const HomePage = () => { // userId prop is no longer used but kept for component signature
-  const [heroImage, setHeroImage] = useState("https://placehold.co/1200x600/0A1931/0A1931"); 
+const HomePage = () => {
+  const [heroImage, setHeroImage] = useState("https://placehold.co/1200x600/0A1931/0A1931"); // Initial placeholder background
   const [loadingImage, setLoadingImage] = useState(false);
 
   // This function is still available if you wish to re-add a button to trigger image generation
@@ -405,13 +399,7 @@ function App() {
 
   return (
     <div className="font-sans antialiased text-gray-800 bg-gray-50">
-      {/* Tailwind CSS CDN */}
-      {/* Moved to public/index.html head <script src="https://cdn.tailwindcss.com"></script> */}
-      {/* Google Fonts: Inter (for body) and Merriweather (for logo) */}
-      {/* Moved to public/index.html head <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:wght@700&display=swap" rel="stylesheet" /> */}
-      
-      {/* Custom CSS for font-family and specific styles */}
-      {/* Moved to public/index.html head <style>{`...`}</style> */}
+    
 
       {/* Header */}
       <header className="header-bg-color shadow-lg py-4 px-6 md:px-12 sticky top-0 z-50">
@@ -453,13 +441,13 @@ function App() {
                   Testimonials are hardcoded for simplicity. */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Testimonials are hardcoded for now, as state management for them across pages would require more complex setup */}
-                <div class="bg-gray-50 p-8 rounded-lg shadow-lg border border-gray-200">
-                  <p class="text-xl italic text-gray-800 mb-6">"Max Ventures delivered exceptional results. A true partner."</p>
-                  <p class="text-lg font-semibold text-blue-800">- CEO, Global Innovations</p>
+                <div className="bg-gray-50 p-8 rounded-lg shadow-lg border border-gray-200">
+                  <p className="text-xl italic text-gray-800 mb-6">"Max Ventures delivered exceptional results. A true partner."</p>
+                  <p className="text-lg font-semibold text-blue-800">- CEO, Global Innovations</p>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-lg shadow-lg border border-gray-200">
-                  <p class="text-xl italic text-gray-800 mb-6">"Their strategic insights were pivotal to our success."</p>
-                  <p class="text-lg font-semibold text-blue-800">- Founder, Apex Solutions</p>
+                <div className="bg-gray-50 p-8 rounded-lg shadow-lg border border-gray-200">
+                  <p className="text-xl italic text-gray-800 mb-6">"Their strategic insights were pivotal to our success."</p>
+                  <p className="text-lg font-semibold text-blue-800">- Founder, Apex Solutions</p>
                 </div>
               </div>
             </div>
