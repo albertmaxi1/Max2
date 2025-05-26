@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-// Removed all Firebase imports and related global variables.
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
 // Function to call Gemini API for text generation
 const callGeminiTextAPI = async (prompt) => {
@@ -374,96 +379,74 @@ const ContactPage = () => {
 
 // Main App Component
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-  // Removed userId and isAuthReady states as Firebase is removed
-  // const [userId, setUserId] = useState(null);
-  // const [isAuthReady, setIsAuthReady] = useState(false);
-
-  // Removed Firebase initialization in useEffect
-  // useEffect(() => { /* ... */ }, []);
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return <HomePage />; // Removed userId prop
-      case 'about':
-        return <AboutPage />;
-      case 'services':
-        return <ServicesPage />;
-      case 'contact':
-        return <ContactPage />;
-      default:
-        return <HomePage />; // Removed userId prop
-    }
-  };
-
   return (
-    <div className="font-sans antialiased text-gray-800 bg-gray-50">
-    
-
-      {/* Header */}
-      <header className="header-bg-color shadow-lg py-4 px-6 md:px-12 sticky top-0 z-50">
-        <nav className="container mx-auto flex items-center justify-between">
-          {/* Hamburger Icon for Mobile */}
-          <button className="md:hidden text-white hover:text-gray-200 focus:outline-none mr-4">
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-          </button>
-
-          {/* Max Ventures Logo (Text-based, mimicking McKinsey) */}
-          <a href="/" onClick={() => setCurrentPage('home')} className="flex items-baseline space-x-1 rounded-md p-2 hover:bg-blue-800 transition duration-300">
-            <span className="text-3xl font-merriweather-bold text-white">Max</span>
-            <span className="text-2xl font-inter-light text-mckinsey-light-gray">&nbsp;Ventures</span>
-          </a>
-
-          {/* Navigation Links */}
-          <div className="hidden md:flex space-x-6 ml-auto">
-            <a href="/" onClick={() => setCurrentPage('home')} className="text-mckinsey-light-gray hover:text-white font-medium transition duration-300 rounded-md p-2 hover:bg-blue-800">Home</a>
-            <a href="/about" onClick={() => setCurrentPage('about')} className="text-mckinsey-light-gray hover:text-white font-medium transition duration-300 rounded-md p-2 hover:bg-blue-800">About</a>
-            <a href="/services" onClick={() => setCurrentPage('services')} className="text-mckinsey-light-gray hover:text-white font-medium transition duration-300 rounded-md p-2 hover:bg-blue-800">Services</a>
-            <a href="/contact" onClick={() => setCurrentPage('contact')} className="text-mckinsey-light-gray hover:text-white font-medium transition duration-300 rounded-md p-2 hover:bg-blue-800">Contact</a>
-          </div>
-        </nav>
-      </header>
-
-      <main>
-        {renderPage()}
-        {/* Testimonials section remains on the home page for brevity and impact */}
-        {currentPage === 'home' && (
-          <section id="testimonials" className="py-16 md:py-24 bg-white">
-            <div className="container mx-auto px-6 md:px-12 text-center">
-              <h2 className="text-4xl font-bold text-blue-900 mb-6">Client Success</h2>
-              <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-12">
-                Voices of our impact.
-              </p>
-              {/* Removed Generate Testimonials button as it currently doesn't update UI state.
-                  Testimonials are hardcoded for simplicity. */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Testimonials are hardcoded for now, as state management for them across pages would require more complex setup */}
-                <div className="bg-gray-50 p-8 rounded-lg shadow-lg border border-gray-200">
-                  <p className="text-xl italic text-gray-800 mb-6">"Max Ventures delivered exceptional results. A true partner."</p>
-                  <p className="text-lg font-semibold text-blue-800">- CEO, Global Innovations</p>
-                </div>
-                <div className="bg-gray-50 p-8 rounded-lg shadow-lg border border-gray-200">
-                  <p className="text-xl italic text-gray-800 mb-6">"Their strategic insights were pivotal to our success."</p>
-                  <p className="text-lg font-semibold text-blue-800">- Founder, Apex Solutions</p>
-                </div>
-              </div>
+    <Router>
+      <div className="font-sans antialiased text-gray-800 bg-gray-50">
+        {/* Header */}
+        <header className="header-bg-color shadow-lg py-4 px-6 md:px-12 sticky top-0 z-50">
+          <nav className="container mx-auto flex items-center justify-between">
+            {/* Hamburger Icon for Mobile */}
+            <button className="md:hidden text-white hover:text-gray-200 focus:outline-none mr-4">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+              </svg>
+            </button>
+            {/* Max Ventures Logo */}
+            <Link to="/" className="flex items-baseline space-x-1 rounded-md p-2 hover:bg-blue-800 transition duration-300">
+              <span className="text-3xl font-merriweather-bold text-white">Max</span>
+              <span className="text-2xl font-inter-light text-mckinsey-light-gray">&nbsp;Ventures</span>
+            </Link>
+            {/* Navigation Links */}
+            <div className="hidden md:flex space-x-6 ml-auto">
+              <Link to="/" className="text-mckinsey-light-gray hover:text-white font-medium transition duration-300 rounded-md p-2 hover:bg-blue-800">Home</Link>
+              <Link to="/about" className="text-mckinsey-light-gray hover:text-white font-medium transition duration-300 rounded-md p-2 hover:bg-blue-800">About</Link>
+              <Link to="/services" className="text-mckinsey-light-gray hover:text-white font-medium transition duration-300 rounded-md p-2 hover:bg-blue-800">Services</Link>
+              <Link to="/contact" className="text-mckinsey-light-gray hover:text-white font-medium transition duration-300 rounded-md p-2 hover:bg-blue-800">Contact</Link>
             </div>
-          </section>
-        )}
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-blue-900 text-white py-8 mt-12 rounded-t-lg">
-        <div className="container mx-auto px-6 md:px-12 text-center">
-          <p>&copy; {new Date().getFullYear()} Max Ventures. All rights reserved.</p>
-          <p className="text-sm text-gray-400 mt-2">Strategic Partner: Albert Martinez-Arizala</p>
-          <p className="text-sm text-gray-400 mt-1">Built with AI-powered content generation.</p>
-        </div>
-      </footer>
-    </div>
+          </nav>
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Routes>
+          {/* Testimonials only on home */}
+          <Routes>
+            <Route path="/" element={
+              <section id="testimonials" className="py-16 md:py-24 bg-white">
+                <div className="container mx-auto px-6 md:px-12 text-center">
+                  <h2 className="text-4xl font-bold text-blue-900 mb-6">Client Success</h2>
+                  <p className="text-lg text-gray-700 max-w-3xl mx-auto mb-12">
+                    Voices of our impact.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Testimonials are hardcoded for now, as state management for them across pages would require more complex setup */}
+                    <div className="bg-gray-50 p-8 rounded-lg shadow-lg border border-gray-200">
+                      <p className="text-xl italic text-gray-800 mb-6">"Max Ventures delivered exceptional results. A true partner."</p>
+                      <p className="text-lg font-semibold text-blue-800">- CEO, Global Innovations</p>
+                    </div>
+                    <div className="bg-gray-50 p-8 rounded-lg shadow-lg border border-gray-200">
+                      <p className="text-xl italic text-gray-800 mb-6">"Their strategic insights were pivotal to our success."</p>
+                      <p className="text-lg font-semibold text-blue-800">- Founder, Apex Solutions</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            } />
+          </Routes>
+        </main>
+        {/* Footer */}
+        <footer className="bg-blue-900 text-white py-8 mt-12 rounded-t-lg">
+          <div className="container mx-auto px-6 md:px-12 text-center">
+            <p>&copy; {new Date().getFullYear()} Max Ventures. All rights reserved.</p>
+            <p className="text-sm text-gray-400 mt-2"></p>
+            <p className="text-sm text-gray-400 mt-1"></p>
+          </div>
+        </footer>
+      </div>
+    </Router>
   );
 }
 

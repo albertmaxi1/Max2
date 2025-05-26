@@ -2,6 +2,7 @@
   "name": "max2",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://maxventurescorp.com/",
   "dependencies": {
     "firebase": "^9.6.0",
     "react": "^18.0.0",
